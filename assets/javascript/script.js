@@ -36,24 +36,22 @@ function loadTrains() {
 
         // Uses moment to populate when the next train will arrive based on the current time
         function NextArrive() {
-            var newTime = moment().add(newTrain.Frequency, 'minutes').format('hh:mm A');;
+            var newTime = moment().add(newTrain.Frequency, 'minutes').format('hh:mm A');
             return newTime;
         };
 
         var hours = NextArrive(newTrain.First_Time);
 
-        function MinutesAway(time) {
-            var currentTime = moment();
-            console.log(currentTime);
-
+        function MinutesAway() {
+            var futureTime = moment().add(newTrain.Frequency, 'minutes');
+            return moment(futureTime).toNow(true);
         };
-        MinutesAway();
-        var minutes = MinutesAway(hours);
 
         tablediv.append('<td>' + newTrain.Train + '</td>');
         tablediv.append('<td>' + newTrain.Destination + '</td>');
         tablediv.append('<td>' + newTrain.Frequency + '</td>');
         tablediv.append('<td>' + hours + '</td>');
+        tablediv.append('<td>' + MinutesAway() + '</td>');
 
         $('#table-body').append(tablediv);
     });
