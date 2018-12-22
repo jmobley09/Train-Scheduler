@@ -36,10 +36,14 @@ function loadTrains() {
 
         // Uses moment to populate when the next train will arrive based on the current time
         function NextArrive() {
+
+            // moment needs a date to work with
+
+            // can add in a row that has how many years the train has been running for fun
             var firstTime = moment(newTrain.First_Time);
-            var newTime = firstTime.add(newTrain.Frequency, 'm').format('hh:mm A');
-            console.log(newTime);
-            return newTime;
+            var nextTime = moment(firstTime).add(newTrain.Frequency, 'minutes').format('HH:mm A');
+            
+            return nextTime;
         };
 
         var hours = NextArrive(newTrain.First_Time);
